@@ -45,12 +45,14 @@ public class DBHandler {
                 " Address varchar(255),\n" +
                 " City varchar(255) \n" +
                 ")");*/
-        //Boolean w = s.execute("INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (1, 'Wittenberg', 'Ryan', 'NH', 'Bedford')");
-        String one = "SELECT * FROM Persons";
+        Boolean w = s.execute("INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (1, 'Wittenberg', 'Ryan', 'NH', 'Bedford')");
+        String one = "SELECT COUNT(*) FROM Persons";
         ResultSet r = s.executeQuery(one);
+
         if(r.next()) {
-            System.out.println(r.getString("LastName"));
+            System.out.println(r.getString(1));
         }
+
     }
 
 
