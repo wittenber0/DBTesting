@@ -1,4 +1,6 @@
+import java.io.FileWriter;
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Created by FMF 7 on 5/10/2017.
@@ -38,20 +40,47 @@ public class DBHandler {
 
     public void createTables() throws Exception{
         Statement s = connection.createStatement();
-        /*Boolean w = s.execute("CREATE TABLE Persons (\n" +
-                " PersonID int,\n" +
-                " LastName varchar(255),\n" +
-                " FirstName varchar(255),\n" +
-                " Address varchar(255),\n" +
-                " City varchar(255) \n" +
-                ")");*/
-        Boolean w = s.execute("INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (1, 'Wittenberg', 'Ryan', 'NH', 'Bedford')");
-        String one = "SELECT COUNT(*) FROM Persons";
-        ResultSet r = s.executeQuery(one);
-
-        if(r.next()) {
-            System.out.println(r.getString(1));
+        try {
+            Boolean w = s.execute("CREATE TABLE Persons (\n" +
+                    " PersonID int,\n" +
+                    " LastName varchar(255),\n" +
+                    " FirstName varchar(255),\n" +
+                    " Address varchar(255),\n" +
+                    " City varchar(255) \n" +
+                    ")");
+        }catch(Exception e){
+            System.out.println("tables already set");
         }
+        Boolean q = s.execute("INSERT INTO Persons VALUES (2, 'Wittenberg', 'Ryan', 'NH', 'Bedford')");
+
+        String rowsQ = "SELECT COUNT(*) FROM Persons";
+        ResultSet rowsR = s.executeQuery(rowsQ);
+
+        if(rowsR.next()) {
+            System.out.println("Number of rows in table Persons " + rowsR.getString(1));
+        }
+
+
+        String allPersonsSQL = "SELECT * FROM Persons";
+        ResultSet allpersonsRS = s.executeQuery(allPersonsSQL);
+
+        int rows = 0;
+        ArrayList rowEntries = new ArrayList();
+
+        FileWriter f = new FileWriter("test.csv");
+        while (allpersonsRS.next()){
+            String aRow = "";
+            aRow += allpersonsRS.getString(1);
+            aRow += allpersonsRS.getString(2);
+            aRow += allpersonsRS.getString(3);
+            aRow += allpersonsRS.getString(4);
+            aRow += allpersonsRS.getString(5);
+
+        }
+
+        f.flush();
+        f.close();
+        System.out.println(rowEntries);
 
     }
 
