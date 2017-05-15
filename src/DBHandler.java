@@ -1,6 +1,9 @@
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by FMF 7 on 5/10/2017.
@@ -64,23 +67,34 @@ public class DBHandler {
         String allPersonsSQL = "SELECT * FROM Persons";
         ResultSet allpersonsRS = s.executeQuery(allPersonsSQL);
 
-        int rows = 0;
-        ArrayList rowEntries = new ArrayList();
-
-        FileWriter f = new FileWriter("test.csv");
+        //FileWriter f = new FileWriter("test2.csv");
         while (allpersonsRS.next()){
             String aRow = "";
             aRow += allpersonsRS.getString(1);
+            aRow += ",";
             aRow += allpersonsRS.getString(2);
+            aRow += ",";
             aRow += allpersonsRS.getString(3);
+            aRow += ",";
             aRow += allpersonsRS.getString(4);
+            aRow += ",";
             aRow += allpersonsRS.getString(5);
-
+            aRow += "\n";
+            //f.append(aRow);
         }
 
-        f.flush();
-        f.close();
-        System.out.println(rowEntries);
+        Scanner scanner = new Scanner(new File("test.csv"));
+
+        String ya = scanner.next();
+        /*scanner.useDelimiter(",");
+        while(scanner.hasNext()){
+            System.out.print(scanner.next()+"|");
+        }*/
+        scanner.close();
+
+        System.out.println(ya);
+        //f.flush();
+        //f.close();
 
     }
 
