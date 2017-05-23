@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OpenWindowController">
+   <children>
+      <TextField fx:id="fileSearch" />
+      <Button fx:id="searchButton" mnemonicParsing="false" onAction="#submitSearch" text="Button" />
+      <TableView fx:id="dbTable" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="idC" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="lastC" prefWidth="75.0" text="Last" />
+            <TableColumn fx:id="firstC" prefWidth="75.0" text="First" />
+            <TableColumn fx:id="stateC" prefWidth="75.0" text="State" />
+            <TableColumn fx:id="cityC" prefWidth="75.0" text="City" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>

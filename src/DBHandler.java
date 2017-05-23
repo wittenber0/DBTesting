@@ -10,6 +10,7 @@ import java.util.Scanner;
  */
 public class DBHandler {
 
+
     private Connection connection;
 
     public DBHandler(Connection c){
@@ -54,7 +55,7 @@ public class DBHandler {
         }catch(Exception e){
             System.out.println("tables already set");
         }
-        Boolean q = s.execute("INSERT INTO Persons VALUES (2, 'Wittenberg', 'Ryan', 'NH', 'Bedford')");
+        //Boolean q = s.execute("INSERT INTO Persons VALUES (1, 'Wittenberg', 'Ryan', 'NH', 'Bedford')");
 
         String rowsQ = "SELECT COUNT(*) FROM Persons";
         ResultSet rowsR = s.executeQuery(rowsQ);
@@ -83,18 +84,15 @@ public class DBHandler {
             //f.append(aRow);
         }
 
-        Scanner scanner = new Scanner(new File("test.csv"));
-
-        String ya = scanner.next();
-        /*scanner.useDelimiter(",");
-        while(scanner.hasNext()){
-            System.out.print(scanner.next()+"|");
-        }*/
-        scanner.close();
-
-        System.out.println(ya);
         //f.flush();
         //f.close();
+
+        /*Scanner scanner = new Scanner(new File("test2.csv"));
+        String ya = scanner.next();
+        scanner.close();
+
+        System.out.println(ya);*/
+
 
     }
 
