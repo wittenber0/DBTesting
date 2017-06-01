@@ -1,11 +1,15 @@
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class OpenWindowController {
@@ -20,6 +24,7 @@ public class OpenWindowController {
 
 
     public void initialize(){
+        firstC.setCellValueFactory(new PropertyValueFactory("firstName"));
 
     }
 
@@ -31,16 +36,20 @@ public class OpenWindowController {
             String pathDirectory = fileSearch.getText();
             System.out.println(pathDirectory);
             Scanner scanner = new Scanner(new File(pathDirectory));
-            ArrayList rows = new ArrayList();
+            LinkedList<Person> rows = new LinkedList<Person>();
             while(scanner.hasNext()) {
                 String str = scanner.next();
 
-                System.out.println(str);
-                rows.add(str);
+                String[] props = str.split(",");
+                Person p = new Person(props[1], props[2], props[3], props[4]);
+                rows.add(p);
 
             }
-            
-            dbTable.setItems(FXCollections.observableArrayList(rows));
+            ObservableList cells = FXCollections.observableArrayList();
+            cells.addAll(rows);
+
+            dbTable.setItems(cells);
+            dbTable.refresh();
         }catch(Exception e){
             System.out.println("failed to find file");
         }
