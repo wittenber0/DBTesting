@@ -96,5 +96,50 @@ public class DBHandler {
 
     }
 
+    public boolean savePersonFile(Person p){
+        try {
+            Statement s = connection.createStatement();
+            if(existingPerson(p)){
+                String delUpdateS = "DELETE FROM Persons WHERE firstName="+p.getFirstName();
+                s.execute(delUpdateS);
+                String addUpdateS = "INSERT INTO Persons ("+p.getID()+","+p.getLastName()+","+p.getFirstName()+","+p.getCity()+","+p.getID()+","+")";
+                s.execute(addUpdateS);
+                return true;
+            }else{
+                String addUpdateS = "INSERT INTO Persons ("+p.getID()+","+p.getLastName()+","+p.getFirstName()+","+p.getCity()+","+p.getID()+","+")";
+                s.execute(addUpdateS);
+                return true;
+            }
+
+        }catch(Exception e){
+
+            return false;
+        }
+    }
+
+    public boolean existingPerson(Person p){
+        try {
+            Statement s = connection.createStatement();
+            String loadS = "SELECT * FROM PERSONS";
+            ResultSet loadRS = s.executeQuery(loadS);
+            ArrayList<Person> personArray = new ArrayList<Person>();
+
+            while(loadRS.next()){
+                Person curP = new Person(loadRS.getString(1),loadRS.getString(2),loadRS.getString(3),loadRS.getString(4));
+                personArray.add(curP);
+            }
+
+            for(Person q:personArray){
+                if(p.equals(q)) {
+                    return true;
+                }
+            }
+            return false;
+
+        }catch(Exception e){
+            return false;
+        }
+    }
+
 
 }

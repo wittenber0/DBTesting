@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -25,6 +26,7 @@ public class OpenWindowController {
 
     public void initialize(){
         firstC.setCellValueFactory(new PropertyValueFactory("firstName"));
+        //dbTable.getColumns().setAll(firstC);
 
     }
 
@@ -50,11 +52,15 @@ public class OpenWindowController {
 
             dbTable.setItems(cells);
             dbTable.refresh();
+
+            FileWriter f = new FileWriter("DBContents.txt");
+
         }catch(Exception e){
             System.out.println("failed to find file");
         }
 
         fileSearch.clear();
 
+        
     }
 }
